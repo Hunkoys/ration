@@ -3,9 +3,80 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="style.css">
     <title>Ration</title>
 </head>
 <body>
-    
+    <main id="workarea">
+        <aside id="AddNewPersonBar">
+            <section id="RationItem">
+                <div id="PersonPicture"></div>
+                <h3 id="PersonName" contenteditable="true">Jason</h2>
+                <div id=RationSeparator></div>
+                <section id="ThingsList">
+                    <!-- <div id="AddNewThingBtn" class="thing"></div> -->
+                    <div class="thing"></div>
+                    <div class="thing"></div>
+                    <div class="thing"></div>
+                    <div class="thing"></div>
+                    <div class="thing"></div>
+                    <div class="thing"></div>
+                    <div class="thing"></div>
+                    <div class="thing"></div>
+                    <div class="thing"></div>
+                    <div class="thing"></div>
+                    <div class="thing"></div>
+                    <div class="thing"></div>
+                    <div class="thing"></div>
+                    <div class="thing"></div>
+                    <div class="thing"></div>
+                    <div class="thing"></div>
+                    <div class="thing"></div>
+                </section>
+            </section>
+        </aside>
+
+        <article id="RationListArea">
+
+        </article>
+    </main>
 </body>
+<script>
+    // Helper Code
+    function l(msg) {
+        console.log(typeof msg, msg)
+    }
+    function gEBI(id) {
+        return document.getElementById(id)
+    }
+
+    
+    
+    class Person {
+        constructor (name) {
+            this.name = name
+            this.things = []
+            this.picture = ''
+        }
+    }
+    
+    class Thing {
+        constructor (name) {
+            this.name = name
+            this.picture = ''
+        }
+    }
+    
+    let wa = gEBI('workarea')
+
+    let PeopleList = []
+
+    function createRation(pName) {
+        let R = document.createElement('section')
+        wa.appendChild(R)
+        return R
+    }
+    
+
+    </script>
 </html>

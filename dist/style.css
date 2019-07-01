@@ -1,0 +1,110 @@
+body, html {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: #333333
+}
+
+#workarea {
+    overflow: hidden;
+    display: flex;
+    padding: 2.5% 0 2.5% 0;
+    height: 90%;
+}
+
+#AddNewPersonBar {
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    background: #888;
+    width: 120px;
+    height: 100%;
+}
+
+#RationListArea {
+    overflow: hidden;
+    display: flex;
+    align-items: flex-start;
+    flex-grow: 7;
+    background: #555;
+    width: 400px;
+    height: 100%;
+}
+/* 
+#AddNewPersonBtn {
+    background: orange;
+    position: absolute;
+    top: 50%;
+    left: 110px;
+    width: 40px;
+    height: 0px;
+} */
+
+/* Ration Item */
+
+#RationItem {
+    overflow: hidden;
+    /* background: whitesmoke; */
+    border: 2px dashed #333;
+    border-radius: 5px;
+    width: 90px;
+    height: 870px;
+    margin: 20px 0 0 0;
+}
+
+#PersonPicture {
+    border-radius: 40px;
+    background: #555;
+    margin: 5px;
+    width: 80px;
+    height: 80px;
+    /* Picture Position */
+}
+
+#PersonName {
+    margin: 10px 0 10px 0;
+    font-family: Arial;
+    text-align: center;
+}
+
+#RationSeparator {
+    background: #444;
+    margin: auto;
+    margin-bottom: 15px;
+    height: 2px;
+    width: 75%;
+}
+
+#ThingsList {
+    /* background: #666; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-y: scroll;
+    max-height: 720px;
+}
+
+#ThingsList::-webkit-scrollbar {
+    width: 0;
+}
+
+.thing {
+    background: #444;
+    flex-shrink: 0;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    border-radius: 15px;
+    width: 50px;    
+    height: 50px;
+}
+
+#AddNewThingBtn {
+    position: absolute;
+    background: #888;
+    border: 2px dashed #333;
+    /* margin-top: 0; */
+}
+
+/* End Of Ration Item */
