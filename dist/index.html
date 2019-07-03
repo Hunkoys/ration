@@ -7,33 +7,19 @@
     <title>Ration</title>
 </head>
 <body>
+    <div id="Template">
+        <section class="ration_item">
+                <div class="person_picture"></div>
+                <input type="text" class="person_name" placeholder="NAME">
+                <div class=ration_separator></div>
+                <section class="things_list"></section>
+        </section>
+    </div>
+
     <main id="workarea">
-        <aside id="AddNewPersonBar">
-            <section id="RationItem">
-                <div id="PersonPicture"></div>
-                <h3 id="PersonName" contenteditable="true">Jason</h2>
-                <div id=RationSeparator></div>
-                <section id="ThingsList">
-                    <!-- <div id="AddNewThingBtn" class="thing"></div> -->
-                    <div class="thing"></div>
-                    <div class="thing"></div>
-                    <div class="thing"></div>
-                    <div class="thing"></div>
-                    <div class="thing"></div>
-                    <div class="thing"></div>
-                    <div class="thing"></div>
-                    <div class="thing"></div>
-                    <div class="thing"></div>
-                    <div class="thing"></div>
-                    <div class="thing"></div>
-                    <div class="thing"></div>
-                    <div class="thing"></div>
-                    <div class="thing"></div>
-                    <div class="thing"></div>
-                    <div class="thing"></div>
-                    <div class="thing"></div>
-                </section>
-            </section>
+        <aside id="ThingsListArea">
+            
+            
         </aside>
 
         <article id="RationListArea">
@@ -48,6 +34,9 @@
     }
     function gEBI(id) {
         return document.getElementById(id)
+    }
+    function gEBCN(cn) {
+        return 
     }
 
     
@@ -67,15 +56,44 @@
         }
     }
     
-    let wa = gEBI('workarea')
+    const template = gEBI('Template').firstElementChild
 
-    let PeopleList = []
+    const rationArea = gEBI('RationListArea')
 
-    function createRation(pName) {
-        let R = document.createElement('section')
-        wa.appendChild(R)
-        return R
+    let People = {
+        list: [],
+        at: function(n) {
+            return this.list[n]
+        },
+        create: function() {
+            let clone = template.cloneNode(true)
+            
+            clone.nameBox = clone.getElementsByClassName('person_name')[0]
+            clone.name = function(n = nameBox.value)
+            { return nameBox.value = n }
+            clone.things = []
+
+            this.list.push(clone)
+            rationArea.appendChild(clone)
+
+            clone.nameBox.focus()
+            return clone
+        }
     }
+
+    document.addEventListener('keydown', e => {
+        l(e.keyCode)
+        switch (e.keyCode) {
+            case 13:
+                e.preventDefault()
+                if (e.ctrlKey) {
+                    People.create()
+                }
+                break
+        }
+    }, true)
+
+    // Copy object using Object.assign()
     
 
     </script>

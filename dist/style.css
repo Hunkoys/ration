@@ -14,7 +14,7 @@ body {
     height: 90%;
 }
 
-#AddNewPersonBar {
+#ThingsListArea {
     overflow: hidden;
     display: flex;
     justify-content: center;
@@ -44,32 +44,36 @@ body {
 
 /* Ration Item */
 
-#RationItem {
+.ration_item {
     overflow: hidden;
     /* background: whitesmoke; */
     border: 2px dashed #333;
     border-radius: 5px;
     width: 90px;
     height: 870px;
-    margin: 20px 0 0 0;
+    margin: 20px 3px 0 3px;
 }
 
-#PersonPicture {
+.person_picture {
     border-radius: 40px;
     background: #555;
+    border: 1px solid #222;
     margin: 5px;
     width: 80px;
     height: 80px;
     /* Picture Position */
 }
 
-#PersonName {
+.person_name {
     margin: 10px 0 10px 0;
-    font-family: Arial;
+    font: bold 1.3em Arial;
     text-align: center;
+    width: 100%;
+    background: none;
+    border: none;
 }
 
-#RationSeparator {
+.ration_separator {
     background: #444;
     margin: auto;
     margin-bottom: 15px;
@@ -77,7 +81,7 @@ body {
     width: 75%;
 }
 
-#ThingsList {
+.things_list {
     /* background: #666; */
     display: flex;
     flex-direction: column;
@@ -86,7 +90,7 @@ body {
     max-height: 720px;
 }
 
-#ThingsList::-webkit-scrollbar {
+.things_list::-webkit-scrollbar {
     width: 0;
 }
 
@@ -107,4 +111,8 @@ body {
     /* margin-top: 0; */
 }
 
+#Template .ration_item {
+    visibility: hidden;
+    position: absolute;
+}
 /* End Of Ration Item */
