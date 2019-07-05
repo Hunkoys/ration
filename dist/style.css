@@ -8,9 +8,10 @@ body {
 }
 
 #workarea {
+    background: #555;
     overflow: hidden;
     display: flex;
-    padding: 2.5% 0 2.5% 0;
+    margin: 2.5% 0 2.5% 0;
     height: 90%;
 }
 
@@ -27,9 +28,9 @@ body {
     overflow: hidden;
     display: flex;
     align-items: flex-start;
-    flex-grow: 7;
+    flex-grow: 10px;
     background: #555;
-    width: 400px;
+    width: fit-content;
     height: 100%;
 }
 /* 
@@ -47,7 +48,7 @@ body {
 .ration_item {
     overflow: hidden;
     /* background: whitesmoke; */
-    border: 2px dashed #333;
+    border: 2px solid #333;
     border-radius: 5px;
     width: 90px;
     height: 870px;
@@ -112,7 +113,10 @@ body {
 }
 
 #Template .ration_item {
-    visibility: hidden;
-    position: absolute;
+    border: 2px dashed #333;
+}
+
+#Template {
+
 }
 /* End Of Ration Item */

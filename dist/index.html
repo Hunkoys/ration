@@ -7,14 +7,7 @@
     <title>Ration</title>
 </head>
 <body>
-    <div id="Template">
-        <section class="ration_item">
-                <div class="person_picture"></div>
-                <input type="text" class="person_name" placeholder="NAME">
-                <div class=ration_separator></div>
-                <section class="things_list"></section>
-        </section>
-    </div>
+    
 
     <main id="workarea">
         <aside id="ThingsListArea">
@@ -25,6 +18,14 @@
         <article id="RationListArea">
 
         </article>
+        <div id="Template">
+                <section class="ration_item">
+                        <div class="person_picture"></div>
+                        <input type="text" class="person_name" placeholder="NAME" autofocus>
+                        <div class=ration_separator></div>
+                        <section class="things_list"></section>
+                </section>
+            </div>
     </main>
 </body>
 <script>
@@ -32,11 +33,17 @@
     function l(msg) {
         console.log(typeof msg, msg)
     }
+    function d(obj) {
+        console.dir(obj)
+    }
     function gEBI(id) {
         return document.getElementById(id)
     }
     function gEBCN(cn) {
         return 
+    }
+    function ae() {
+        return document.activeElement
     }
 
     
@@ -57,26 +64,33 @@
     }
     
     const template = gEBI('Template').firstElementChild
+    template.nameBox = template.getElementsByClassName('person_name')[0]
+    template.nameBox.onblur = function(e) { if (!this.value && People.list.length > 0) { this.parentElement.style.visibility = 'hidden' } }
 
     const rationArea = gEBI('RationListArea')
-
+    
     let People = {
         list: [],
         at: function(n) {
             return this.list[n]
         },
+        last: function() {
+            return this.list[this.list.length - 1]
+        },
         create: function() {
             let clone = template.cloneNode(true)
             
-            clone.nameBox = clone.getElementsByClassName('person_name')[0]
-            clone.name = function(n = nameBox.value)
-            { return nameBox.value = n }
+            template.nameBox.value = ''
+
+            clone.nameBox = clone.getElementsByClassName('person_name')[0] // This might be a bad idea since it might override an existing member
             clone.things = []
+            clone.style.removeProperty('visibility')
+            clone.name = function(n = clone.nameBox.value) //nameBox is weird.. Fix
+            { return clone.nameBox.value = n }
 
             this.list.push(clone)
             rationArea.appendChild(clone)
 
-            clone.nameBox.focus()
             return clone
         }
     }
@@ -84,16 +98,34 @@
     document.addEventListener('keydown', e => {
         l(e.keyCode)
         switch (e.keyCode) {
-            case 13:
-                e.preventDefault()
-                if (e.ctrlKey) {
+            case 9:
+                if (!e.shiftKey) {
+                    if (ae() == template.nameBox) {
+                        e.preventDefault()
+                        People.create()
+                    }
+                    else if (ae() == People.last().nameBox) {
+                        e.preventDefault()
+                        template.style.visibility = 'visible'
+                        template.nameBox.focus()
+                    }
+                }
+                break
+            case 13:  //n
+                if  (e.ctrlKey) {    
+                    e.preventDefault()
+                    template.style.visibility = 'visible'
+                    template.nameBox.focus()
+                }
+                else if (ae() == template.nameBox) {
+                    e.preventDefault()
                     People.create()
+                    People.last().nameBox.focus()
                 }
                 break
         }
     }, true)
 
-    // Copy object using Object.assign()
     
 
     </script>
