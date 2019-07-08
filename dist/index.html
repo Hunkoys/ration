@@ -7,25 +7,39 @@
     <title>Ration</title>
 </head>
 <body>
-    
 
     <main id="workarea">
         <aside id="ThingsListArea">
-            
-            
+            <!-- <h3>Stuff</h3> -->
+            <h1 id="stuff_heading">Stuff</h1>
+            <section class="things_list">
+                <!-- <div class="thing" style="background: #fff url(https://2.bp.blogspot.com/-WJ_SyrEAAuA/VeBie8iI7UI/AAAAAAAACdk/XL4T9WntDtU/s1600/web_2083701088_f3ecec98.jpg) no-repeat; background-size: 200%; background-position: -30px -10px"></div> -->
+                <button id="AddNewThingBtn" class="thing"></button>
+            </section>
         </aside>
 
         <article id="RationListArea">
 
         </article>
         <div id="Template">
-                <section class="ration_item">
-                        <div class="person_picture"></div>
-                        <input type="text" class="person_name" placeholder="NAME" autofocus>
-                        <div class=ration_separator></div>
-                        <section class="things_list"></section>
+            <section class="ration_item">
+                    <div class="person_picture"></div>
+                    <input type="text" class="person_name" placeholder="NAME" autofocus>
+                    <div class=ration_separator></div>
+                    <section class="things_list"></section>
+            </section>
+        </div>
+
+        <div id="GiveThingPopup">
+                <div id="GTOverlay"></div>
+                <section id="GiveThing">
+                    <aside id="GTReceiver"></aside>
+                    <main>
+                        <h1 class='window_title'>Stuff</h1>
+                        <div id="GTList" class="grid_thing_list"></div>
+                    </main>
                 </section>
-            </div>
+        </div>
     </main>
 </body>
 <script>
@@ -39,36 +53,25 @@
     function gEBI(id) {
         return document.getElementById(id)
     }
-    function gEBCN(cn) {
-        return 
-    }
     function ae() {
         return document.activeElement
     }
+    function px(val) {
+        return val + 'px'
+    }
+    function val(px) {
+        return Number(px.replace('px', ''))
+    }
 
-    
-    
-    class Person {
-        constructor (name) {
-            this.name = name
-            this.things = []
-            this.picture = ''
-        }
-    }
-    
-    class Thing {
-        constructor (name) {
-            this.name = name
-            this.picture = ''
-        }
-    }
+
+    const rationArea = gEBI('RationListArea')
     
     const template = gEBI('Template').firstElementChild
     template.nameBox = template.getElementsByClassName('person_name')[0]
     template.nameBox.onblur = function(e) { if (!this.value && People.list.length > 0) { this.parentElement.style.visibility = 'hidden' } }
-
-    const rationArea = gEBI('RationListArea')
     
+    let heldThing = null //TODO: Use DataTransfer instead. We'll put ID's on items
+
     let People = {
         list: [],
         at: function(n) {
@@ -81,20 +84,36 @@
             let clone = template.cloneNode(true)
             
             template.nameBox.value = ''
-
+            
             clone.nameBox = clone.getElementsByClassName('person_name')[0] // This might be a bad idea since it might override an existing member
-            clone.things = []
+            clone.things = [] // Probably wont be used
             clone.style.removeProperty('visibility')
-            clone.name = function(n = clone.nameBox.value) //nameBox is weird.. Fix
+            clone.name = function(n = clone.nameBox.value)  // Probably wont be used
             { return clone.nameBox.value = n }
+            clone.things_list = clone.getElementsByClassName('things_list')[0]
+            clone.things_list.Add = function(item = undefined) {
+                if (item) {
+                    // Sorter
+                    let clone = item.cloneNode(true)
+                    clone.style.pointerEvents = 'none'
+                    this.appendChild(clone)
+                }
+                else { l('Param is ' + item +  ' at clone.things_list.Add(<here>)') }
+            }
+            clone.things_list.addEventListener('dragenter', function(e) {
+                e.preventDefault()
+                this.Add(heldThing)
+            })
+            
+            clone.things_list.addEventListener('click', openGiveThingsPopup)
 
             this.list.push(clone)
             rationArea.appendChild(clone)
-
+            
             return clone
         }
     }
-
+    
     document.addEventListener('keydown', e => {
         l(e.keyCode)
         switch (e.keyCode) {
@@ -111,7 +130,7 @@
                     }
                 }
                 break
-            case 13:  //n
+                case 13:  //n
                 if  (e.ctrlKey) {    
                     e.preventDefault()
                     template.style.visibility = 'visible'
@@ -123,10 +142,91 @@
                     People.last().nameBox.focus()
                 }
                 break
+            }
+        }, true)
+        
+
+        let drag = function() {} 
+        let wa_onmousemove = function(e) { 
+            drag(e)
         }
-    }, true)
 
-    
+        const workarea = gEBI('workarea')
+        workarea.addEventListener('mousemove', wa_onmousemove)
+        
+        let addThingBtn = gEBI('AddNewThingBtn')
 
-    </script>
+        const ThingsList = gEBI('ThingsListArea').getElementsByClassName('things_list')[0]
+        
+        
+        let thing_outline
+
+        let Things = {
+            list: [],
+            outline: {},
+            create: function() {
+                let thing = document.createElement('div')
+                thing.className = 'thing'
+                thing.draggable = true;
+                thing.addEventListener('dragstart', function(e) {
+                    outline = thing.cloneNode(true)
+                    heldThing = thing
+                    outline.style.pointerEvents = 'none'
+                    outline.style.position = 'absolute'
+                    outline.style.top = '-50px'
+                    workarea.appendChild(outline)
+                    e.dataTransfer.setDragImage(outline, 0, 0)
+                }, false)
+                thing.addEventListener('dragend', function(e) {
+                    outline.remove()
+                    heldThing = undefined
+                }, false)
+                
+                // thing.addEventListener('')
+                this.list.push(thing)
+                ThingsList.appendChild(thing)
+            },
+        }
+
+        document.addEventListener('mouseup', function(e) {
+            drag = function (e) {}
+            if (thing_outline) {
+                workarea.removeChild(thing_outline)
+                thing_outline = undefined
+            }
+            heldThing = null
+        })
+        
+
+        addThingBtn.addEventListener('mouseup', function(e) {
+            Things.create()
+        })
+
+        function silenceDoc(e) {
+            if (e)
+                e.preventDefault()
+        }
+
+        // Give Items Window //
+
+        const gtPopUP = gEBI('GiveThingPopup')
+        const gtr = gEBI('GTReceiver')
+        const gtOverlay = gEBI('GTOverlay')
+
+        gtOverlay.addEventListener('click', function(e) {
+            gtPopUP.style.visibility = 'hidden'
+            gtr.innerHTML = ''
+        })
+
+        function openGiveThingsPopup(e) {
+            let clone = e.target.parentElement.cloneNode(true)
+            l(clone)
+            //clone.getElementsByClassName('person_name')[0].addEventListener('click', function(e) {l('clicfk'); this.focus()})
+            gtr.appendChild(clone)
+            gtPopUP.style.visibility = 'visible'
+        }
+
+
+
+        </script>
 </html>

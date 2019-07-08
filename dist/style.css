@@ -4,6 +4,7 @@ body, html {
 }
 
 body {
+    font-family: Arial;
     background: #333333
 }
 
@@ -15,15 +16,6 @@ body {
     height: 90%;
 }
 
-#ThingsListArea {
-    overflow: hidden;
-    display: flex;
-    justify-content: center;
-    background: #888;
-    width: 120px;
-    height: 100%;
-}
-
 #RationListArea {
     overflow: hidden;
     display: flex;
@@ -33,6 +25,8 @@ body {
     width: fit-content;
     height: 100%;
 }
+
+
 /* 
 #AddNewPersonBtn {
     background: orange;
@@ -88,6 +82,7 @@ body {
     flex-direction: column;
     align-items: center;
     overflow-y: scroll;
+    height: 100%;
     max-height: 720px;
 }
 
@@ -106,7 +101,6 @@ body {
 }
 
 #AddNewThingBtn {
-    position: absolute;
     background: #888;
     border: 2px dashed #333;
     /* margin-top: 0; */
@@ -120,3 +114,75 @@ body {
 
 }
 /* End Of Ration Item */
+
+
+/* Side Bar */
+
+#ThingsListArea {
+    overflow: hidden;
+    justify-content: center;
+    background: #888;
+    width: 120px;
+    height: 100%;
+}
+
+#ImageBrowser {
+    position: absolute;
+    left: 0px;
+    width: 800px;
+    height: 800px;
+}
+
+#stuff_heading {
+    text-align: center;
+}
+
+/* Give Items Window */
+
+#GiveThingPopup {
+    visibility: hidden;
+}
+
+#GTOverlay {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    background: gray;
+    opacity: .6;
+}
+
+#GiveThing {
+    position: absolute;
+    background: #999999;
+    display: flex;
+    border-radius: 15px;
+    overflow: hidden;
+    width: 1300px;
+    height: 900px;
+    top: 60px;
+    left: calc(50% - 650px);
+}
+
+#GTReceiver {
+
+}
+
+#GiveThing > main {
+    background: #444;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+}
+
+.window_title {
+    text-align: center;
+}
+
+#GTList {
+    background: #222;
+    height: 100%;
+}
+
