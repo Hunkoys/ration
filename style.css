@@ -1,0 +1,188 @@
+body, html {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial;
+    background: #333333
+}
+
+#workarea {
+    background: #555;
+    overflow: hidden;
+    display: flex;
+    margin: 2.5% 0 2.5% 0;
+    height: 90%;
+}
+
+#RationListArea {
+    overflow: hidden;
+    display: flex;
+    align-items: flex-start;
+    flex-grow: 10px;
+    background: #555;
+    width: fit-content;
+    height: 100%;
+}
+
+
+/* 
+#AddNewPersonBtn {
+    background: orange;
+    position: absolute;
+    top: 50%;
+    left: 110px;
+    width: 40px;
+    height: 0px;
+} */
+
+/* Ration Item */
+
+.ration_item {
+    overflow: hidden;
+    /* background: whitesmoke; */
+    border: 2px solid #333;
+    border-radius: 5px;
+    width: 90px;
+    height: 870px;
+    margin: 20px 3px 0 3px;
+}
+
+.person_picture {
+    border-radius: 40px;
+    background: #555;
+    border: 1px solid #222;
+    margin: 5px;
+    width: 80px;
+    height: 80px;
+    /* Picture Position */
+}
+
+.person_name {
+    margin: 10px 0 10px 0;
+    font: bold 1.3em Arial;
+    text-align: center;
+    width: 100%;
+    background: none;
+    border: none;
+}
+
+.ration_separator {
+    background: #444;
+    margin: auto;
+    margin-bottom: 15px;
+    height: 2px;
+    width: 75%;
+}
+
+.things_list {
+    /* background: #666; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-y: scroll;
+    height: 100%;
+    max-height: 720px;
+}
+
+.things_list::-webkit-scrollbar {
+    width: 0;
+}
+
+.thing {
+    background: #444;
+    flex-shrink: 0;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    border-radius: 15px;
+    width: 50px;    
+    height: 50px;
+}
+
+#AddNewThingBtn {
+    background: #888;
+    border: 2px dashed #333;
+    /* margin-top: 0; */
+}
+
+#Template .ration_item {
+    border: 2px dashed #333;
+}
+
+#Template {
+
+}
+/* End Of Ration Item */
+
+
+/* Side Bar */
+
+#ThingsListArea {
+    overflow: hidden;
+    justify-content: center;
+    background: #888;
+    width: 120px;
+    height: 100%;
+}
+
+#ImageBrowser {
+    position: absolute;
+    left: 0px;
+    width: 800px;
+    height: 800px;
+}
+
+#stuff_heading {
+    text-align: center;
+}
+
+/* Give Items Window */
+
+#GiveThingPopup {
+    visibility: hidden;
+}
+
+#GTOverlay {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    background: gray;
+    opacity: .6;
+}
+
+#GiveThing {
+    position: absolute;
+    background: #999999;
+    display: flex;
+    border-radius: 15px;
+    overflow: hidden;
+    width: 1300px;
+    height: 900px;
+    top: 60px;
+    left: calc(50% - 650px);
+}
+
+#GTReceiver {
+
+}
+
+#GiveThing > main {
+    background: #444;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+}
+
+.window_title {
+    text-align: center;
+}
+
+#GTList {
+    background: #222;
+    height: 100%;
+}
+
