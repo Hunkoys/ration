@@ -132,7 +132,7 @@
                 break
                 case 13:  //n
                 if  (e.ctrlKey) {    
-                    e.preventDefault()
+                    e.preventDefault() 
                     template.style.visibility = 'visible'
                     template.nameBox.focus()
                 }
@@ -146,13 +146,7 @@
         }, true)
         
 
-        let drag = function() {} 
-        let wa_onmousemove = function(e) { 
-            drag(e)
-        }
-
         const workarea = gEBI('workarea')
-        workarea.addEventListener('mousemove', wa_onmousemove)
         
         let addThingBtn = gEBI('AddNewThingBtn')
 
@@ -188,24 +182,9 @@
             },
         }
 
-        document.addEventListener('mouseup', function(e) {
-            drag = function (e) {}
-            if (thing_outline) {
-                workarea.removeChild(thing_outline)
-                thing_outline = undefined
-            }
-            heldThing = null
-        })
-        
-
         addThingBtn.addEventListener('mouseup', function(e) {
             Things.create()
         })
-
-        function silenceDoc(e) {
-            if (e)
-                e.preventDefault()
-        }
 
         // Give Items Window //
 
