@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        html {
+            margin: 0;
+        }
+        body {
+            margin: 20px;
+            width: 8.5in;
+            height: 11in;
+        }
+        #table{
+            font-size: 1.5em;
+        }
+        #table td {
+            padding: 10px;
+        }
+        #prices {
+            display: flex;
+            justify-content: space-evenly;
+        }
+        .priceContainer {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-end;
+        }
+        .price {
+            border: 2px solid #333;
+            text-align: center;
+            vertical-align: middle;
+        }
+        #small .price {
+            border-radius: 25px;
+            width: 50px;
+            height: 50px;
+            line-height: 50px; 
+        }
+        #large .price {
+            border-radius: 35px;
+            width: 60px;
+            height: 60px;
+            line-height: 60px;
+        }
+
+        .perperson {
+            font: bold 1.3em arial;
+            color: #779;
+            margin: 5px;
+        }
+        .perperson span {
+            font: bold 1.5em arial;
+            color: #000;
+        }   
+    </style>
+</head>
+<body>
+    <section id="prices">
+        <div id="small" class="priceContainer">
+            <div class="price"></div>
+            <div class="perperson"></div>
+        </div>
+        <div id="large" class="priceContainer">
+            <div class="price"></div>
+            <div class="perperson"></div>
+        </div>
+    </section>
+    <br>
+    <table id="table">
+        
+    </table>
+</body>
+</html>

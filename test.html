@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        html, body {
+            height: 100%;
+        }
+        body {
+            margin: 0px;
+            display: flex;
+        }
+        #calculator {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow: hidden;
+            border-right: 1px solid #888;
+            padding: 10px;
+            width: 400px;
+        }
+
+        #in_name {
+            font-size: 1.5em;
+            height: 30px;
+            padding-left: 10px;
+            border: 2px solid #888;
+            border-right: 0px solid #888;
+            border-radius: 5px 0 0 5px;
+        }
+        #in_name:focus {
+            border: 2px solid orangered;
+            border-right: 0px solid #888;
+            box-shadow: 0px 0px 1px 1px rgba(255, 68, 0, 0.287);
+        }
+        #bt_add {
+            font-size: 1.5em;
+            height: 36px;
+            width: 36px;
+            border: 2px solid #888;
+            border-left: 0px solid #888;
+            border-radius: 0 5px 5px 0;
+            background: #ccc;
+        }
+        #in_name:focus + #bt_add {
+            border: 2px solid orangered;
+            color: orangered;
+            box-shadow: 0px 0px 1px 1px rgba(255, 68, 0, 0.287);
+            border-left: 0px solid #888;
+        }
+        #bt_add:hover {
+            background: #bbb;
+            cursor: pointer;
+        }
+        #bt_add:active {
+            background: #999;
+        }
+
+        #calculations {
+            width: 300px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: #ddd;
+            border: 2px solid #888;
+            border-radius: 5px;
+            margin: 15px;
+        }
+        #sizes {
+            display: flex;
+            width: 100%;
+        }
+        #calc_sml {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            align-items: center;
+        }
+        #calc_lrg {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            align-items: center;
+        }
+        #sml_pizza {
+            width: 40px;
+            height: 40px;
+            text-align: center;
+            border-radius: 20px;
+            background: red;
+        }
+        #lrg_pizza {
+            width: 50px;
+            height: 50px;
+            border-radius: 25px;
+            background: red;
+        }
+
+        #list_container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow: auto;
+            padding-top: 30px;
+            height: 100%;
+            width: 100%;
+            border: 1px solid black;
+        }
+
+
+        .pizza_size {
+            margin: 10px;
+        }
+        .pizza_size span {
+            font-size: 1.1em;
+        }
+        .item {
+            display: flex;
+            justify-content: space-between;
+            border: 2px solid #888;
+            height: 50px;
+            width: 340px;
+            margin-bottom: 8px;
+            border-radius: 10px;
+        }
+        .item span {
+            margin-top: 10px;
+            margin-left: 24px;
+            font: 27px arial;
+        }
+        .item div {
+            transition: width 0.2s ease;
+            cursor: pointer;
+            background: red;
+            overflow: hidden;
+            width: 50px;
+            border-radius: 9px;
+            font: bold 35px verdana;
+            color: #333;
+            text-align: center;
+        }
+
+        .item div:hover {
+            width: 180px;
+        }
+
+        #price_lrg, #price_sml {
+            border-bottom: 1px solid #333;
+            background: white;
+            padding: 8px;
+        }
+
+
+        /* Printer Section */
+
+        #printer {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 80%;
+        }
+
+        #bt_print {
+            font-size: 1.5em;
+            border-radius: 5px;
+            margin: 10px;
+        }
+
+        #printable {
+            width: 9in;
+            height: 100%;
+            margin: 20px;
+        }
+        /* Modifier Classes */
+
+        .no_outline {
+            outline: none;
+        }
+
+        .small_text_container {
+            height: 1em;
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body>
+    <aside id="calculator">
+        <section>
+            <input type="text" id="in_name" class="no_outline" autofocus><button id="bt_add" class="no_outline">+</button>
+        </section>
+        <section id="calculations">
+            <section id="sizes">
+                    <div id="calc_sml" class="pizza_size">
+                        <div>$<span id="price_sml" contenteditable="true">10</span> </div>
+                        <br>
+                        <div id="sml_pizza">
+
+                        </div>
+                        <div id="price_sml_pp" class="small_text_container">
+                            <span>0</span>
+                        </div>
+                    </div>
+                    <div id="calc_lrg"class="pizza_size">
+                        <div>$<span id="price_lrg" contenteditable="true">13</span></div>
+                        <br>
+                        <div id="lrg_pizza">
+
+                        </div>
+                        <div id="price_lrg_pp" class="small_text_container">
+                            <span>0</span>
+                        </div>
+                    </div>
+            </section>
+            <h3 id="calc_title">Price Per Person</h3>
+        </section>
+        <section id="list_container">
+        </section>
+    </aside>
+    <form name="form" id="printer">
+        <button id="bt_print">Print</button>
+        <iframe id="printable" src="pizzaprint.html" frameborder="1"></iframe>
+    </form>
+
+</body>
+<script>
+    // helpers
+    function l(msg){
+        console.log(msg)
+    }
+    function gebi(id) {
+        return document.getElementById(id)
+    }
+
+    let printable
+    window.onload = e => {
+        const printableID = window.frames['printable']
+        printable = printableID.contentWindow ? printableID.contentWindow.document : printableID.contentDocument
+    
+        
+    let txtPriceSml = gebi('price_sml_pp')
+    let txtPriceLrg = gebi('price_lrg_pp')
+
+    let priceOfSml
+    let priceOfLrg
+    let prntPrices = printable.getElementById('prices')
+    function updatePrices() {
+        priceOfSml = gebi('price_sml').innerHTML
+        priceOfLrg = gebi('price_lrg').innerHTML
+    }
+    updatePrices()
+
+    gebi('price_sml').addEventListener('keyup', e => {updatePrices(); calculate();updatePrintable()})
+    gebi('price_lrg').addEventListener('keyup', e => {updatePrices(); calculate();updatePrintable()})
+
+    let inputName = gebi('in_name')
+    let addBtn = gebi('bt_add')
+    let listContainer = gebi('list_container')
+
+    function addPerson(name) {
+        let item = document.createElement('div')
+        item.className = 'item'
+        
+        let span = document.createElement('span')
+        span.contentEditable = true
+        span.innerHTML = name;
+        span.addEventListener('keyup', function() {updatePrintable()})
+        inputName.value = ''
+        item.appendChild(span)
+        let div = document.createElement('div')
+        div.innerHTML = 'x'
+        div.addEventListener('mouseover',  function() {this.innerHTML = 'Remove'})
+        div.addEventListener('mouseleave', function() {this.innerHTML = 'x'})
+        div.addEventListener('click', function() {this.parentElement.remove();calculate();updatePrintable()})
+        item.appendChild(div)
+        listContainer.appendChild(item)
+        calculate()
+        updatePrintable()
+    }
+
+    inputName.addEventListener('keyup', e => {
+        if (e.key == 'Enter') {
+            addPerson(inputName.value)
+        }
+    }, true)
+    addBtn.addEventListener('click', e => {addPerson(inputName.value)}, true)
+
+
+    function calculate() {
+        let list = document.getElementsByClassName('item')
+        if (!list.length) {
+            txtPriceLrg.firstElementChild.innerHTML = txtPriceSml.firstElementChild.innerHTML = 0
+        }
+        else {
+            txtPriceSml.firstElementChild.innerHTML = (Math.ceil((priceOfSml * 100) / list.length)/100).toFixed(2)
+            txtPriceLrg.firstElementChild.innerHTML = (priceOfLrg / list.length).toFixed(2)
+        }
+    }
+
+    function updatePricesPrintable() {
+        let prntSmlPr = printable.getElementById('small')
+        let prntLrgPr = printable.getElementById('large')
+        prntSmlPr.firstElementChild.innerHTML = `$${priceOfSml}`
+        prntLrgPr.firstElementChild.innerHTML = `$${priceOfLrg}`
+        prntSmlPr.lastElementChild.innerHTML = `<span>$${txtPriceSml.innerHTML}</span> Per Person`
+        prntLrgPr.lastElementChild.innerHTML = `<span>$${txtPriceLrg.innerHTML}</span> Per Person`
+    }
+    updatePricesPrintable()
+    function updatePrintable() {
+        const list = document.getElementsByClassName('item')
+        let table = printable.getElementById('table')
+        table.innerHTML = ''
+        for (let i = 0; i < list.length; i++ ) {
+            let row = document.createElement('tr')
+            let checkbox = document.createElement('td')
+            let namebox = document.createElement('td')
+            checkbox.innerHTML = '____'
+            namebox.innerHTML = list[i].firstElementChild.innerHTML
+
+            row.appendChild(checkbox)
+            row.appendChild(namebox)
+            table.appendChild(row)
+        }   
+        updatePricesPrintable()
+    }
+
+    let btnPrint = gebi('bt_print')
+    btnPrint.onclick = function(e) {
+        e.preventDefault()
+        console.dir(window.frames[0].print())
+    }
+
+    } // End of window.Onload
+
+    // Printer Section
+
+
+</script>
+</html>
