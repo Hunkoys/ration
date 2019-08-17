@@ -23,6 +23,10 @@
             width: 400px;
         }
 
+        #nameinput_container {
+            display: flex;
+            flex-wrap: nowrap;
+        }
         #in_name {
             font-size: 1.5em;
             height: 30px;
@@ -39,21 +43,20 @@
         #bt_add {
             font-size: 1.5em;
             height: 36px;
-            width: 36px;
+            width: 84px;
             border: 2px solid #888;
             border-left: 0px solid #888;
             border-radius: 0 5px 5px 0;
-            background: #ccc;
+            color: floralwhite;
+            background: lightskyblue;
         }
         #in_name:focus + #bt_add {
-            border: 2px solid orangered;
-            color: orangered;
-            box-shadow: 0px 0px 1px 1px rgba(255, 68, 0, 0.287);
             border-left: 0px solid #888;
         }
         #bt_add:hover {
             background: #bbb;
             cursor: pointer;
+            background: deepskyblue;
         }
         #bt_add:active {
             background: #999;
@@ -190,8 +193,8 @@
 </head>
 <body>
     <aside id="calculator">
-        <section>
-            <input type="text" id="in_name" class="no_outline" autofocus><button id="bt_add" class="no_outline">+</button>
+        <section id="nameinput_container">
+            <input type="text" id="in_name" class="no_outline" autofocus><button id="bt_add" class="no_outline">JOIN</button>
         </section>
         <section id="calculations">
             <section id="sizes">
@@ -287,7 +290,7 @@
             addPerson(inputName.value)
         }
     }, true)
-    addBtn.addEventListener('click', e => {addPerson(inputName.value)}, true)
+    addBtn.addEventListener('click', e => {addPerson(inputName.value); inputName.focus()}, true)
 
 
     function calculate() {

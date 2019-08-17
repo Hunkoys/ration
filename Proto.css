@@ -1,0 +1,201 @@
+body, html {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial;
+    background: #202124;
+}
+
+input {
+    border: 0 solid black;
+    outline: 0 solid black;
+    background: white;
+}
+
+button {
+    border: 0 solid black;
+    outline: 0 solid black;
+    background: white;
+}
+
+
+/* Global Variables */
+:root {
+    --dirtywhite: #f5f5f5;
+    --bordergray: #5F6368;
+    --btn-small: 40px;
+    --shadow: #1b1b1b;
+}
+
+@keyframes BorderPulse {
+    from {border-color: var(--bordergray);}
+    to {border-color: #444;}
+}
+
+
+/* Main_Window */
+
+#Main_Window {
+    display: flex;
+    align-items: center;
+}
+
+#Things_Section {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 90px;
+    border-bottom: 1px solid #777;
+    box-shadow: 0px 2px 2px 0px #1b1b1b;
+}
+
+#Things_Section .title {
+    color: var(--dirtywhite);
+    margin: 0 40px 0 40px;
+  	display:table-cell;
+  	vertical-align:middle;
+}
+
+#Thing_Template {
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 80px;
+    margin: 5px;
+    overflow: hidden;
+    transition: opacity 0.15s ease-in-out 0.1s;
+}
+
+#Thing_Template_Img {
+    --img-size: 40px;
+    display: block;
+    width: var(--img-size);
+    height: var(--img-size);
+    border: 2px dashed var(--bordergray);
+    border-radius: 5px;
+    margin: 4px;
+    overflow: hidden;
+}
+#Thing_Template_Img img {
+    position: relative;
+    left: -10px;
+    width: auto;
+    height: 100%;
+}
+
+#Thing_Template_Input {
+    display: block;
+    width: inherit;
+    border-bottom: 1px dashed var(--bordergray);
+    border-radius: 3px;
+    background-color: inherit;
+    /* background: #525355; */
+    text-align: center;
+    color: var(--dirtywhite);
+}
+#Things_Button_Container {
+    position: relative;
+}
+#Confirm_Btn_Set {
+    display: flex;
+    position: absolute;
+    top: 40px;
+    left: -98px;
+    padding: 2px;
+    background: rgba(68, 69, 70, 0.897);
+    border-radius: 10px;
+    box-shadow: -10px -10px 16px rgba(0, 0, 0, 0.411);
+    transition: opacity 0.32s ease-in-out;
+}
+#Create_Thing_Btn {
+    position: absolute;
+    left: -70px;
+    top: -24px;
+    background: rgb(243, 179, 31);
+    transition: opacity 0.15s ease 0.1s;
+}
+#Cancel_Thing_Btn {
+    background: rgb(236, 14, 14);
+}
+#Add_Thing_Btn {
+    background: rgb(89, 243, 17);
+}
+
+
+
+
+/* Things List */
+#Things_list {
+    display: flex;
+    align-items: center;
+    position: relative;
+    height: 70px;
+    width: calc(100% - 275px);
+    left: 30px;
+    padding: 5px 20px 0 20px;
+    border-radius: 30px;
+    box-shadow: -2px 0px 5px black inset;
+    overflow: scroll;
+}
+
+.thing_display {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-shrink: 0;
+    position: relative;
+    height: 60px;
+    width: 60px;
+    margin: 0 4px 0 4px;
+}
+.thing_display:hover span{
+    visibility: visible;
+}
+.thing_display div {
+    width: 50px;
+    height: 50px;
+    border: 1px solid var(--bordergray);
+    border-radius: 7px;
+    overflow: hidden;
+}
+.thing_display span {
+    visibility: hidden;
+    position: absolute;
+    color: var(--dirtywhite);
+}
+
+/* End of Main_Window */
+
+
+/* Classes */
+
+.small_circle_btn {
+    flex-shrink: 0;
+    height: var(--btn-small);
+    width: var(--btn-small);
+    border-radius: calc(var(--btn-small)/2);
+    margin: 5px;
+    box-shadow: -2px -2px 3px rgb(31, 31, 31);
+    transition: box-shadow 0.04s;
+}
+
+.small_circle_btn:active {
+    box-shadow: 0px 0px 0px black;
+}
+
+@keyframes removal {
+    from {visibility: visible}
+    to {visibility: hidden}
+}
+.removed {
+    opacity: 0;
+    animation: removal 0s linear 0.4s 1 normal forwards;
+}
+
+.shrinked {
+    height: 0px;
+    width: 0px;
+}

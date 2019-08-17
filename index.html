@@ -62,6 +62,9 @@
     function val(px) {
         return Number(px.replace('px', ''))
     }
+    function ce(element) {
+        return document.createElement(element)
+    }
 
 
     const rationArea = gEBI('RationListArea')
@@ -160,7 +163,18 @@
             outline: {},
             create: function() {
                 let thing = document.createElement('div')
+                let closebtn = ce('div')
                 thing.className = 'thing'
+                closebtn.className = 'thing_close_button'
+                closebtn.addEventListener('click', function () {
+                    let del = confirm       ('Delete thing?')
+                    if (del) {
+                        this.parentElement.remove()
+                    }
+                    })
+                thing.appendChild(closebtn)
+                thing.style.backgroundColor = `#${Math.round(Math.random()*9)}33`
+                
                 thing.draggable = true;
                 thing.addEventListener('dragstart', function(e) {
                     outline = thing.cloneNode(true)
