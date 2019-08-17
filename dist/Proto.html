@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="Proto.css">
+    <title>Prototype</title>
+</head>
+<body>
+    <main id="App">
+        <section id="Main_Window">
+            <aside id="Things_Section">
+                <!-- <h3>Stuff</h3> -->
+                <h1 class="title">Things</h1>
+                <section id="Thing_Template" class="removed">
+                    <div id="Thing_Template_Img">
+                        <img src="" alt="">
+                    </div>
+                    <input type="text" name="" id="Thing_Template_Input" placeholder="Name">
+                </section>
+                <section id="Things_Button_Container">
+                    <button id="Create_Thing_Btn" class="small_circle_btn">+</button>
+                    <section id="Confirm_Btn_Set" class="removed">
+                        <button id="Cancel_Thing_Btn" class="small_circle_btn">x</button>
+                        <button id="Add_Thing_Btn" class="small_circle_btn">v</button>
+                    </section>
+                </section>
+                <section id="Things_list">
+                    <!-- <div class="thing" style="background: #fff url(https://2.bp.blogspot.com/-WJ_SyrEAAuA/VeBie8iI7UI/AAAAAAAACdk/XL4T9WntDtU/s1600/web_2083701088_f3ecec98.jpg) no-repeat; background-size: 200%; background-position: -30px -10px"></div> -->
+                </section>
+            </aside>
+
+            <article id="People_Section">
+
+            </article>
+        </section>
+        
+<!--         
+        <div id="Template">
+            <section class="ration_item">
+                    <div class="person_picture"></div>
+                    <input type="text" class="person_name" placeholder="NAME" autofocus>
+                    <div class=ration_separator></div>
+                    <section class="things_list"></section>
+            </section>
+        </div> -->
+
+        <!-- <div id="Edit_People_Window">
+                <div id="GTOverlay"></div>
+                <section id="GiveThing">
+                    <aside id="GTReceiver"></aside>
+                    <main>
+                        <h1 class='window_title'>Stuff</h1>
+                        <div id="GTList" class="grid_thing_list"></div>
+                    </main>
+                </section>
+        </div> -->
+    </main>
+</body>
+<script>
+    // Helper Code
+    function l(msg) {
+        console.log(typeof msg, msg)
+    }
+    function d(obj) {
+        console.dir(obj)
+    }
+    function gebi(id) {
+        return document.getElementById(id)
+    }
+    function ae() {
+        return document.activeElement
+    }
+    function px(val) {
+        return val + 'px'
+    }
+    function val(px) {
+        return Number(px.replace('px', ''))
+    }
+    function ce(element) {
+        return document.createElement(element)
+    }
+    
+    function appendClass() {
+        let counter = arguments.length - 1
+        let node = arguments[arguments.length - 1] //please avoid putting counter in braces
+        for(let i = 0; counter > i; i++ ) {
+            if (!node.className.includes(arguments[i])) {
+                node.className = node.className +  ` ${arguments[i]}`
+            }
+        }
+    }
+
+    function removeClass() {
+        let counter = arguments.length - 1
+        let node = arguments[arguments.length - 1] //please avoid putting counter in braces
+        for(let i = 0; counter > i; i++ ) {
+            node.className = node.className.replace(` ${arguments[i]}`, '')
+            node.className = node.className.replace(`${arguments[i]}`, '')
+        }
+        
+    }
+    
+
+    // Things List
+
+    let Thing_Template = gebi('Thing_Template')
+    let Thing_Template_Img = gebi('Thing_Template_Img')
+    let Thing_Template_Input = gebi('Thing_Template_Input')
+    let Create_Thing_Btn = gebi('Create_Thing_Btn')
+    let Confirm_Btn_Set = gebi('Confirm_Btn_Set')
+    let Cancel_Thing_Btn = gebi('Cancel_Thing_Btn')
+    let Add_Thing_Btn = gebi('Add_Thing_Btn')
+    let Things_list = gebi('Things_list')
+
+    Create_Thing_Btn.addEventListener('click', function(e) {
+        appendClass('removed', Create_Thing_Btn)
+        removeClass('removed', Thing_Template)
+        removeClass('removed', Confirm_Btn_Set)
+        Thing_Template_Input.focus()
+    })
+
+    Cancel_Thing_Btn.addEventListener('click', function(e) {
+        removeClass('removed', Create_Thing_Btn)
+        appendClass('removed', Thing_Template)
+        appendClass('removed', Confirm_Btn_Set)
+        Thing_Template_Input.value = ''
+        Thing_Template_Img.firstElementChild.src = ''
+        Thing_Template_Img.style.removeProperty('border')
+        Thing_Template_Img.style.removeProperty('margin')
+    })
+
+    Add_Thing_Btn.addEventListener('click', function(e) {
+        let thing = ce('div')
+        thing.className = 'thing_display'
+        let img_cont = ce('div')
+        let img = ce('img')
+        img_cont.appendChild(img)
+        let name = ce('span')
+        img.src = Thing_Template_Img.firstElementChild.src;
+        name.innerHTML = Thing_Template_Input.value;
+        thing.appendChild(img_cont)
+        thing.appendChild(name)
+        Things_list.appendChild(thing)
+        Thing_Template_Img.firstElementChild.src = ''
+        Thing_Template_Input.value = ''
+        Thing_Template_Input.focus()
+    })
+
+    Thing_Template_Img.addEventListener('click', function(e) {
+        let link = prompt('Enter image link below')
+        Thing_Template_Img.firstElementChild.src = link
+        if (link) {
+            Thing_Template_Img.style.border = '1px solid #5F6368'
+            Thing_Template_Img.style.margin = '5px'
+        }
+    })
+
+    Thing_Template_Input.addEventListener('keyup', function(e) {
+        if (e.target.value) {
+            e.target.style.borderBottomStyle = 'solid'
+        }
+        else {
+            e.target.style.removeProperty('border-style')
+        }
+    })
+</script>
+</html>
